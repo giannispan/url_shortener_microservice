@@ -1,4 +1,4 @@
-# timestamp_microservice
+# url_shortener_microservice
 
 run npm install
 
