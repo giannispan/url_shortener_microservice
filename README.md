@@ -19,11 +19,11 @@ localhost:8080/new/http://foo.com:80
 
 Example creation output
 
-{ "original_url":"https://www.google.com", "short_url":"localhost/8170" }
+{ "original_url":"https://www.google.com", "short_url":"localhost:8080/8170" }
 
 Usage:
 
-https://little-url.herokuapp.com/8170
+localhost:8080/8170
 
 Will redirect to:
 
