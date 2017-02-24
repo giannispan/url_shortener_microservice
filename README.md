@@ -4,14 +4,27 @@ run npm install
 
 start server with node server.js
 
-go to localhost:8080
 
-Example usage:
+User stories:
 
-localhost:8080/December%2015,%202015
+I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.
 
-localhost:8080/1450137600
+When I visit that shortened URL, it will redirect me to my original link.
 
-Example output:
+Example creation usage:
 
-{ "unix": 1450137600, "natural": "December 15, 2015" }
+localhost:8080/new/https://www.google.com
+
+localhost:8080/new/http://foo.com:80
+
+Example creation output
+
+{ "original_url":"https://www.google.com", "short_url":"localhost/8170" }
+
+Usage:
+
+https://little-url.herokuapp.com/8170
+
+Will redirect to:
+
+https://www.google.com/
