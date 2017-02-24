@@ -1,14 +1,25 @@
 //Required modules
 var http = require('http')
 var express = require('express')
+var session = require('express-session')
+var FileStore = require('session-file-store')(session)
 
 // Build the app
 var app = express();
+
+app.use(session({
+    store: new FileStore,
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 //get request
 app.get('/new/:url(*)', function (req, res, next) {
 //request the url parameter
 var url = req.params.url
+
 var host_url = 'http://' + req.headers.host + '/'
 
 //check if url string is valid
@@ -21,6 +32,12 @@ var host_url = 'http://' + req.headers.host + '/'
 var random = Math.floor(1000 + Math.random() * 9000);
 
 if(validateURL(url)) {
+if((req.session.url)) {
+	console.log('already in session')
+}
+else{
+	req.session.url = url;
+}
 res.send({original_url: url, short_url:host_url+random})
 
 }
@@ -31,10 +48,14 @@ res.send(message)
 next()
 })
 
-//redirection
+//redirect
 app.get('/:url', function (req, res) {
-res.redirect()
-console.log(req.params.url)
+if (req.session.url) {
+    
+   res.redirect(req.session.url);
+  } else { 
+    res.end('Url not found');
+  }
 })
 
 // Start server up!
